@@ -15,11 +15,13 @@ const columns = [
     title: 'Price, $',
     dataIndex: 'price',
     defaultSortOrder: 'descend',
-    sorter: (a, b) => a.age - b.age,
+    sorter: (a, b) => a.price - b.price,
   },
   {
     title: 'Amount, $',
     dataIndex: 'amount',
+    defaultSortOrder: 'descend',
+    sorter: (a, b) => a.amount - b.amount,
   },
 ];
 
