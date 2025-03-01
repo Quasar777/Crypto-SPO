@@ -9,6 +9,7 @@ const contentStyle = {
     lineHeight: '120px',
     color: '#fff',
     backgroundColor: '#0958d9',
+    borderRadius: '1rem 0 0 0 ',
   };
 
 export default function AppContent() {
@@ -16,7 +17,7 @@ export default function AppContent() {
 
     return (
       <Layout.Content style={contentStyle}>
-        <Typography.Title style={{textAlign: 'left', color: '#fff'}} level={3}>
+        <Typography.Title style={{textAlign: 'left', color: '#fff', margin: '1rem'}} level={3}>
           Portfolio: ${assets.reduce((acc, {totalAmount}) => acc + totalAmount, 0).toFixed(2)}
         </Typography.Title>
         <PortfolioChart />

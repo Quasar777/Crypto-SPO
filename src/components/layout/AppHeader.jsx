@@ -12,6 +12,7 @@ const headerStyle = {
     display: 'flex',
     justifyContent: 'space-between',
     alignItems: 'center',
+    backgroundColor: 'rgb(6, 35, 57)'
   };
   
 export default function AppHeader() {

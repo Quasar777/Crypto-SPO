@@ -8,6 +8,7 @@ import CryptoContext from '../../context/crypto-context';
 
 const siderStyle = {
     padding: '1rem',
+    backgroundColor: 'rgb(6, 35, 57)',
 };
 
 

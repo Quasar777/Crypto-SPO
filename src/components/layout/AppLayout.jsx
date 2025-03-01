@@ -15,7 +15,7 @@ export default function AppLayout() {
     return (
         <Layout>
             <AppHeader />
-            <Layout>
+            <Layout style={{backgroundColor: 'rgb(6, 35, 57)'}}>
                 <AppSider />
                 <AppContent />
             </Layout>
