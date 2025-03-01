@@ -28,10 +28,10 @@ export default function AddAssetForm({onClose}) {
                 title="New asset added!"
                 subTitle={`Added ${assetRef.current.amount} ${coin.name} by price $${assetRef.current.price}`}
                 extra={[
-                <Button type="primary" key="console" onClick={onclose}>
-                    Go Console
+                <Button type="primary" key="console" onClick={onClose}>
+                    Close
                 </Button>,
-                <Button key="buy">Buy Again</Button>,
+                
                 ]}
             />
         )
