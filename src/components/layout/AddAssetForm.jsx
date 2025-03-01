@@ -1,5 +1,5 @@
 import { Select, Space, Typography, Flex, Divider, Form, Input, InputNumber, Button, DatePicker, Result} from "antd"
-import { useState } from "react"
+import { useState, useRef } from "react"
 import { useCrypto } from "../../context/crypto-context"
 import CoinInfo from "./CoinInfo";
 
@@ -18,6 +18,7 @@ export default function AddAssetForm({onClose}) {
     const [form] = Form.useForm() 
     const [coin, setCoin] = useState(null)
     const [submitted, setSubmitted] = useState(false)
+    const assetRef = useRef()
     const {crypto} = useCrypto()
 
     if (submitted) {
@@ -25,7 +26,7 @@ export default function AddAssetForm({onClose}) {
             <Result
                 status="success"
                 title="New asset added!"
-                subTitle={`Added ${50} of ${coin.name} by price ${100}`}
+                subTitle={`Added ${assetRef.current.amount} ${coin.name} by price $${assetRef.current.price}`}
                 extra={[
                 <Button type="primary" key="console" onClick={onclose}>
                     Go Console
@@ -58,6 +59,13 @@ export default function AddAssetForm({onClose}) {
 
     function onFinish(values) {
         console.log(values)
+        const newAsset = {
+            id: coin.id,
+            amount: values.amount,
+            price: values.price,
+            date: values.date?.$d ?? new Date(),
+        }
+        assetRef.current = newAsset
         setSubmitted(true)
     }
 
