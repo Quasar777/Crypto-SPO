@@ -23,7 +23,7 @@ export default function AppSider() {
                 <Statistic 
                     title={capitalizeFirstLetter(asset.id)}
                     value={asset.totalAmount}
-                    precision={2}
+                    precision={3}
                     valueStyle={{ color: asset.grow ? '#3f8600' : '#cf1322' }}
                     prefix={asset.grow ? <ArrowUpOutlined /> : <ArrowDownOutlined /> }
                     suffix="$"

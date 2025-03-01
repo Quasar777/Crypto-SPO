@@ -73,14 +73,14 @@ export default function AddAssetForm({onClose}) {
     function handleAmountChange(value) {
         const price = form.getFieldValue('price')
         form.setFieldsValue({
-            total: +(value * price).toFixed(2)
+            total: +(value * price).toFixed(10)
         })
     }
 
     function handlePriceChange(value) {
         const amount = form.getFieldValue('amount')
         form.setFieldsValue({
-            total: +(value * value).toFixed(2)
+            total: +(value * value).toFixed(10)
         })
     }
 
@@ -92,7 +92,7 @@ export default function AddAssetForm({onClose}) {
         wrapperCol={{ span: 10 }}
         style={{ maxWidth: 600 }}
         initialValues={{ 
-            price: +coin.price.toFixed(2),
+            price: +coin.price.toFixed(10),
 
         }}
         onFinish={onFinish}
@@ -116,7 +116,7 @@ export default function AddAssetForm({onClose}) {
                     />
                 </Form.Item>
 
-                <Form.Item label="Price" name="price">
+                <Form.Item label="Price, $" name="price">
                     <InputNumber onChange={handlePriceChange} style={{width: '100%'}} />
                 </Form.Item>
 

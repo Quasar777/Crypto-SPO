@@ -1,5 +1,5 @@
 export function percentDifference(a, b) {
-    return +(100 * Math.abs( (a - b) / ((a + b)/2) )).toFixed(2)
+    return +(100 * Math.abs( (a - b) / ((a + b)/2) )).toFixed(6)
 }
 
 export function capitalizeFirstLetter(str) {
