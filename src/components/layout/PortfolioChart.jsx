@@ -23,6 +23,7 @@ export default function PortfolioChart() {
               'rgba(153, 102, 255, 1)',
               'rgba(255, 159, 64, 1)',
             ],
+            
             borderWidth: 1,
           },
         ],
@@ -35,7 +36,9 @@ export default function PortfolioChart() {
                 justifyContent: 'center',
                 height: 400,
             }}>
-            <Pie data={data}/>
+            <Pie data={data} options={{
+                color: "#fff"
+            }}/>
         </div>
     )
 }
