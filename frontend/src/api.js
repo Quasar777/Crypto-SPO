@@ -1,5 +1,36 @@
 import { cryptoAssets } from './data'
 
+
+export function connectCryptoWebSocket(setData) {
+  const socket = new WebSocket('ws://localhost:8054'); // Подключаемся к WebSocket-серверу
+
+  socket.onopen = () => {
+    console.log('WebSocket соединение установлено');
+  };
+
+  socket.onmessage = (event) => {
+    try {
+      const data = JSON.parse(event.data);
+      console.log('WebSocket данные отправлены');
+      setData(data); // Обновляем состояние в React с новыми данными
+    } catch (error) {
+      console.error('Ошибка при обработке данных:', error);
+    }
+  };
+
+  socket.onclose = () => {
+    console.log('WebSocket соединение закрыто');
+  };
+
+  socket.onerror = (error) => {
+    console.error('WebSocket ошибка:', error);
+  };
+
+  return socket; // Можно использовать для закрытия соединения при размонтировании компонента
+}
+
+
+
 export async function fetchCryptoData() {
   try {
     // Отправка GET-запроса на сервер
@@ -21,7 +52,6 @@ export async function fetchCryptoData() {
     throw error; // Можно выбросить ошибку дальше или вернуть какой-то fallback
   }
 }
-
 
 
 export function fetchAssets() {

@@ -1,7 +1,7 @@
 import { Layout, Spin } from 'antd'
-import AppHeader from './AppHeader'
-import AppSider from './AppSider'
-import AppContent from './AppContent'
+import AppHeader from '../layout/AppHeader'
+import AppSider from '../layout/AppSider'
+import AppContent from '../layout/AppContent'
 import { useContext } from 'react'
 import CryptoContext from '../../context/crypto-context'
 

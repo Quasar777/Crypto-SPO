@@ -3,10 +3,14 @@ const API_KEY = process.env.COINSTATS_API_KEY;
 
 const express = require('express');
 const app = express();
-const fs = require("fs");
 const PORT = 8054;
-  
+const WebSocket = require('ws');
+const http = require('http');
+
 app.use(express.static('../frontend/dist'));
+
+const server = http.createServer(app);
+const wss = new WebSocket.Server({ server });
 
 const options = {
     method: "GET",
@@ -15,6 +19,39 @@ const options = {
         "X-API-KEY": API_KEY,
     },
 };
+
+// WebSocket-сервер для передачи обновлений
+wss.on("connection", (ws) => {
+    console.log("Новое соединение WebSocket");
+
+    const sendCoinData = async () => {
+        try {
+            const response = await fetch("https://openapiv1.coinstats.app/coins", options);
+
+            if (!response.ok) {
+                throw new Error("Ошибка при получении данных с API");
+            }
+
+            const data = await response.json();
+            console.log("WebSocket Данные были отправлены клиенту");
+            ws.send(JSON.stringify(data)); // Отправляем данные клиенту
+        } catch (err) {
+            console.error("Ошибка при запросе:", err);
+        }
+    };
+
+    // Отправляем данные сразу после подключения
+    sendCoinData();
+
+    // Устанавливаем интервал обновления данных (например, каждые 10 секунд)
+    const interval = setInterval(sendCoinData, 10000);
+
+    ws.on("close", () => {
+        console.log("Соединение WebSocket закрыто");
+        clearInterval(interval); // Очищаем интервал при закрытии соединения
+    });
+});
+
 
 // Эндпоинт для получения данных с сервера
 app.get("/api/coins", async (req, res) => {
@@ -36,4 +73,10 @@ app.get("/api/coins", async (req, res) => {
     }
 });
 
-app.listen(PORT, () => console.log(`[NOTE] Сервер запущен на http://localhost:${PORT}`));
+
+// Обычные API-запросы могут работать параллельно
+app.get("/api/ping", (req, res) => {
+    res.json({ message: "Сервер работает" });
+});
+
+server.listen(PORT, () => console.log(`[NOTE] Сервер запущен на http://localhost:${PORT}`));

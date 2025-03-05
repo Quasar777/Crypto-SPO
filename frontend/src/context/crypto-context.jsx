@@ -1,5 +1,5 @@
 import { createContext, useState, useEffect, useContext } from 'react'
-import { fetchCryptoData, fetchAssets } from '../api'
+import { fetchCryptoData, connectCryptoWebSocket, fetchAssets } from '../api'
 import { percentDifference } from '../utils'
 
 const CryptoContext = createContext({
