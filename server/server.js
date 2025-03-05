@@ -1,6 +1,5 @@
 require('dotenv').config({ path: '../.env' });
-// const API_KEY = process.env.COINSTATS_API_KEY;
-const API_KEY = "ItzO1NoZEQjxnlaWBNnr5+H0JO/Vu78MO/2tdrxtF7Q="
+const API_KEY = process.env.COINSTATS_API_KEY;
 
 const express = require('express');
 const app = express();
