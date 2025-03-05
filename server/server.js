@@ -44,7 +44,7 @@ wss.on("connection", (ws) => {
     sendCoinData();
 
     // Устанавливаем интервал обновления данных (например, каждые 10 секунд)
-    const interval = setInterval(sendCoinData, 10000);
+    const interval = setInterval(sendCoinData, 50000);
 
     ws.on("close", () => {
         console.log("Соединение WebSocket закрыто");
