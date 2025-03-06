@@ -1,6 +1,3 @@
-import { cryptoAssets } from './data'
-
-
 export function connectCryptoWebSocket(setData) {
   const socket = new WebSocket('ws://localhost:8054'); // Подключаемся к WebSocket-серверу
 
@@ -55,9 +52,18 @@ export async function fetchCryptoData() {
 
 
 export function fetchAssets() {
-  return new Promise((resolve) => {
-    setTimeout(() => {
-      resolve(cryptoAssets)
-    }, 1)
-  })
+  return fetch('http://localhost:8054/api/user') // Запрос к вашему API
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error('Ошибка при загрузке данных');
+      }
+      return response.json(); // Парсим JSON
+    })
+    .then((data) => {
+      return data.cryptoAssets; // Возвращаем данные из API
+    })
+    .catch((error) => {
+      console.error('Ошибка:', error);
+      throw error; // Пробрасываем ошибку, чтобы её можно было обработать
+    });
 }

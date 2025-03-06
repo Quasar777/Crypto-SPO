@@ -1,6 +1,6 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { CryptoContextProvider } from './context/crypto-context';
-import AppLayout from './components/pages/AppLayout';
+import MainPage from './components/pages/mainPage';
 import PriceTest from './components/pages/priceTest';
 import UserTest from './components/pages/userTest';
 import Error404 from './components/pages/Error404';
@@ -11,7 +11,7 @@ export default function App() {
       <Router>
         <Routes>
           {/* Маршрут для главной страницы */}
-          <Route path="/" element={<AppLayout />} />
+          <Route path="/" element={<MainPage />} />
           {/* Маршрут для страницы "О нас" */}
           <Route path="/price" element={<PriceTest />} />
           {/* Маршрут для страницы тест*/}
