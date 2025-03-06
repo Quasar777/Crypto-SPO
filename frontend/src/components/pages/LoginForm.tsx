@@ -1,7 +1,7 @@
 import React, {FC, useContext, useState} from "react";
-import { Context } from "..";
 import { observer } from "mobx-react-lite";
-import "../components/LoginFormStyles.css"
+import { Context } from "../../";
+import "./LoginFormStyles.css"
 
 
 

@@ -1,6 +1,7 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { CryptoContextProvider } from './context/crypto-context';
 import MainPage from './components/pages/mainPage';
+import SignPage from './components/pages/LoginForm'
 import PriceTest from './components/pages/priceTest';
 import UserTest from './components/pages/userTest';
 import Error404 from './components/pages/Error404';
@@ -12,6 +13,8 @@ export default function App() {
         <Routes>
           {/* Маршрут для главной страницы */}
           <Route path="/" element={<MainPage />} />
+          {/* Маршрут для страницы авторизации*/}
+          <Route path="/sign" element={<SignPage />} />
           {/* Маршрут для страницы тест*/}
           <Route path="/test/price" element={<PriceTest />} />
           {/* Маршрут для страницы тест*/}

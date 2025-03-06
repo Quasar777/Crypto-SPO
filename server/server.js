@@ -6,11 +6,13 @@ const fs = require('fs');
 const path = require('path');
 const app = express();
 const PORT = 8054;
+const cors = require('cors');
 const WebSocket = require('ws');
 const http = require('http');
 
 app.use(express.static('../frontend/dist'));
 
+app.use(cors());
 const server = http.createServer(app);
 const wss = new WebSocket.Server({ server });
 
