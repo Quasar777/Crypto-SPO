@@ -7,7 +7,7 @@ import AddAssetForm from '../AddAssetForm'
 const headerStyle = {
   width: '100%',
   textAlign: 'center',
-  height: 60,
+  height: 80,
   padding: '1rem',
   display: 'flex',
   justifyContent: 'space-between',
