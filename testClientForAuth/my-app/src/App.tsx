@@ -46,10 +46,8 @@ function App() {
       <LoginForm />
     )
   }
-
   
   
-
   return (
     <div>
       <h1>{store.isAuth ? `Пользователь ${store.user.email} авторизован.` : "Авторизуйтесь!"}</h1>
