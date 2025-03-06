@@ -13,6 +13,7 @@ const contentStyle = {
 
 export default function AppContent() {
   const { assets, crypto } = useCrypto()
+  //console.log(crypto)
 
   const cryptoPriceMap = crypto.reduce((acc, c) => {
     acc[c.id] = c.price

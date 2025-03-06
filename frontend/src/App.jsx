@@ -12,10 +12,10 @@ export default function App() {
         <Routes>
           {/* Маршрут для главной страницы */}
           <Route path="/" element={<MainPage />} />
-          {/* Маршрут для страницы "О нас" */}
-          <Route path="/price" element={<PriceTest />} />
           {/* Маршрут для страницы тест*/}
-          <Route path="/user" element={<UserTest />} />
+          <Route path="/test/price" element={<PriceTest />} />
+          {/* Маршрут для страницы тест*/}
+          <Route path="/test/user" element={<UserTest />} />
           {/* Маршрут для страницы 404 */}
           <Route path="*" element={<Error404 />} />
         </Routes>

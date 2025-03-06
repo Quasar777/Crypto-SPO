@@ -24,21 +24,21 @@ const options = {
 
 // WebSocket-сервер для передачи обновлений
 wss.on("connection", (ws) => {
-    console.log("Новое соединение WebSocket");
+    console.log("[WebSocket server] Новое соединение WebSocket");
 
     const sendCoinData = async () => {
         try {
             const response = await fetch("https://openapiv1.coinstats.app/coins", options);
 
             if (!response.ok) {
-                throw new Error("Ошибка при получении данных с API");
+                throw new Error("[WebSocket server] Ошибка при получении данных с COINSTATS API");
             }
 
             const data = await response.json();
-            console.log("WebSocket Данные были отправлены клиенту");
+            console.log("[WebSocket server] Данные были отправлены клиенту");
             ws.send(JSON.stringify(data)); // Отправляем данные клиенту
         } catch (err) {
-            console.error("Ошибка при запросе:", err);
+            console.error("[WebSocket server] Ошибка при запросе:", err);
         }
     };
 
@@ -46,35 +46,13 @@ wss.on("connection", (ws) => {
     sendCoinData();
 
     // Устанавливаем интервал обновления данных (например, каждые 10 секунд)
-    const interval = setInterval(sendCoinData, 10000);
+    const interval = setInterval(sendCoinData, 5000);
 
     ws.on("close", () => {
-        console.log("Соединение WebSocket закрыто");
+        console.log("[WebSocket server] Соединение WebSocket закрыто");
         clearInterval(interval); // Очищаем интервал при закрытии соединения
     });
 });
-
-
-// Эндпоинт для получения данных с сервера
-app.get("/api/coins", async (req, res) => {
-    try {
-        // Используем await для асинхронного запроса
-        const response = await fetch("https://openapiv1.coinstats.app/coins", options);
-
-        if (!response.ok) {
-            throw new Error('Ошибка при получении данных с API');
-        }
-
-        const data = await response.json(); // Получаем данные в формате JSON
-        console.log("Данные были отправлены");
-        res.json(data); // Отправляем данные на клиент
-
-    } catch (err) {
-        console.error("Ошибка при запросе:", err);
-        res.status(500).json({ error: "Ошибка при чтении данных с сервера" });
-    }
-});
-
 
 
 // Путь к JSON-файлу
@@ -86,7 +64,7 @@ app.get('/api/user', (req, res) => {
     fs.readFile(filePath, 'utf8', (err, data) => {
         if (err) {
             // Если файл не найден или произошла ошибка при чтении
-            res.status(500).json({ error: 'Ошибка при чтении файла' });
+            res.status(500).json({ error: '[API] Ошибка при чтении файла' });
         } else {
             try {
                 // Парсим JSON и отправляем его
@@ -94,10 +72,10 @@ app.get('/api/user', (req, res) => {
                 res.json({ cryptoAssets });
             } catch (parseError) {
                 // Если JSON некорректен
-                res.status(500).json({ error: 'Ошибка при парсинге JSON' });
+                res.status(500).json({ error: '[API] Ошибка при парсинге JSON' });
             }
         }
     });
 });
 
-server.listen(PORT, () => console.log(`[NOTE] Сервер запущен на http://localhost:${PORT}`));
+server.listen(PORT, () => console.log(`[SERVER NOTE] Сервер запущен на http://localhost:${PORT}`));

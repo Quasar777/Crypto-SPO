@@ -9,6 +9,7 @@ const siderStyle = {
 }
 
 export default function AppSider() {
+
   const { assets } = useContext(CryptoContext)
 
   return (
@@ -32,7 +33,6 @@ export default function AppSider() {
                 withTag: true,
               },
               { title: 'Coins Amount', value: asset.amount, isPlain: true },
-              // { title: 'Difference', value: asset.growPercent },
             ]}
             renderItem={(item) => (
               <List.Item>
@@ -44,7 +44,7 @@ export default function AppSider() {
                     </Tag>
                   )}
                   {item.isPlain && item.value}
-                  {!item.isPlain && (
+                  {!item.isPlain && item.value !== undefined && (
                     <Typography.Text type={asset.grow ? 'success' : 'danger'}>
                       {item.value.toFixed(2)}$
                     </Typography.Text>
