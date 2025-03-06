@@ -5,17 +5,26 @@ import { Context } from '.';
 import { observer } from 'mobx-react-lite';
 import { IUser } from './models/IUser';
 import UserService from './service/UserService';
-import { BrowserRouter } from 'react-router';
+
+
 
 function App() {
   const {store} = useContext(Context)
   const [users, setUsers] = useState<IUser[]>([])
+  
 
   useEffect(() => {
     if (localStorage.getItem('token')) {
       store.checkAuth()
     }
   }, [])
+
+  useEffect(() => {
+    if (store.user.isActivated) {
+      window.location.href = "http://localhost:5173";
+    }
+  }, [store.user.isActivated]);
+
 
   async function getUsers() {
     try {
@@ -32,15 +41,13 @@ function App() {
     )
   }
 
-  if (store.user.isActivated) {
-
-  }
-
   if (!store.isAuth) {
     return (
       <LoginForm />
     )
   }
+
+  
   
 
   return (

@@ -14,7 +14,7 @@ const options = {
     method: "GET",
     headers: {
         accept: "application/json",
-        "X-API-KEY": API_KEY,
+        "X-API-KEY": API_KEY
     },
 };
 
