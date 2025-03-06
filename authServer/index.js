@@ -11,7 +11,10 @@ const app = express()
 
 app.use(express.json());
 app.use(cookieParser());
-app.use(cors());
+app.use(cors({
+    credentials: true,
+    origin: process.env.AUTH_CLIENT_URL // указываем адрес фронтенда с которым будем обмениваться
+}));
 app.use('/api', router)
 app.use(errorMiddleware) // MW обязательно должен идти последним
 
