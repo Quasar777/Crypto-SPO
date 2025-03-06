@@ -1,7 +1,8 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { CryptoContextProvider } from './context/crypto-context';
 import AppLayout from './components/pages/AppLayout';
-import AboutPage from './components/pages/About';
+import PriceTest from './components/pages/priceTest';
+import UserTest from './components/pages/userTest';
 import Error404 from './components/pages/Error404';
 
 export default function App() {
@@ -12,7 +13,9 @@ export default function App() {
           {/* Маршрут для главной страницы */}
           <Route path="/" element={<AppLayout />} />
           {/* Маршрут для страницы "О нас" */}
-          <Route path="/about" element={<AboutPage />} />
+          <Route path="/price" element={<PriceTest />} />
+          {/* Маршрут для страницы тест*/}
+          <Route path="/user" element={<UserTest />} />
           {/* Маршрут для страницы 404 */}
           <Route path="*" element={<Error404 />} />
         </Routes>

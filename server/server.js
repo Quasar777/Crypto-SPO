@@ -2,6 +2,8 @@ require('dotenv').config({ path: '../.env' });
 const API_KEY = process.env.COINSTATS_API_KEY;
 
 const express = require('express');
+const fs = require('fs');
+const path = require('path');
 const app = express();
 const PORT = 8054;
 const WebSocket = require('ws');
@@ -74,9 +76,28 @@ app.get("/api/coins", async (req, res) => {
 });
 
 
-// Обычные API-запросы могут работать параллельно
-app.get("/api/ping", (req, res) => {
-    res.json({ message: "Сервер работает" });
+
+// Путь к JSON-файлу
+const filePath = path.join(__dirname, 'userData.json');
+
+// Роут для возврата данных из JSON-файла
+app.get('/api/user', (req, res) => {
+    // Читаем файл
+    fs.readFile(filePath, 'utf8', (err, data) => {
+        if (err) {
+            // Если файл не найден или произошла ошибка при чтении
+            res.status(500).json({ error: 'Ошибка при чтении файла' });
+        } else {
+            try {
+                // Парсим JSON и отправляем его
+                const cryptoAssets = JSON.parse(data);
+                res.json({ cryptoAssets });
+            } catch (parseError) {
+                // Если JSON некорректен
+                res.status(500).json({ error: 'Ошибка при парсинге JSON' });
+            }
+        }
+    });
 });
 
 server.listen(PORT, () => console.log(`[NOTE] Сервер запущен на http://localhost:${PORT}`));
