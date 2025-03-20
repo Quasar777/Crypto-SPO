@@ -8,7 +8,9 @@ const app = express();
 const PORT = 8054;
 const WebSocket = require('ws');
 const http = require('http');
+const cors = require('cors')
 
+app.use(cors())
 app.use(express.static('../frontend/dist'));
 
 const server = http.createServer(app);
