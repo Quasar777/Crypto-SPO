@@ -1,23 +1,49 @@
-import React, { FC } from "react";
+import React, { FC, useContext, useEffect } from "react";
 import './styles/normalize.css'
 import './styles/WelcomePageStyles.css'
 import about1Path from './images/about1.svg'
 import about2Path from './images/about2.svg'
 import about3Path from './images/about3.svg'
 import bitcoinImagePath from './images/bitcoin-image.webp'
+import bgForLogin from '../images/authBackground.jpg'
 import { Typography } from "antd";
+import { Context } from "..";
+import { observer } from "mobx-react-lite";
+import LoginForm from "../components/LoginForm/LoginForm";
+
+
 
 const WelcomePage: FC = () => {
+    const {store} = useContext(Context)
 
+    useEffect(() => {
+        if (localStorage.getItem("token")) {
+          store.checkAuth();
+        }
+    }, []);
 
-  return (
+    if (store.isLoading) {
+        return <div>Загрузка...</div>;
+    }
+
+    if (!store.isAuth) {
+    return (
+      <div style={{ background: `url(${bgForLogin}) center/cover no-repeat`, width: '100vw', height: '100vh' }}>
+        <div style={{display: 'flex', justifyContent: 'center'}}>
+          <LoginForm />
+        </div>
+      </div>
+    );
+    }
+
+    return (
         <div>
         <header className="header container">
             <p className="logo">Cryptan</p>
             <nav className="header__navigation">
                 <ul className="header__navigation-list">
                     <li className="header__navigation-item">
-                        <p className="header__navigation-link header__navigation-link--acc">tsaloev.sarmat@gmail.com</p>
+                        <p className="header__navigation-link header__navigation-link--acc">{store.user.email}</p>
                     </li>
                     <li className="header__navigation-item">
                         <a href="/" className="header__navigation-link">Главная</a>
@@ -26,7 +52,7 @@ const WelcomePage: FC = () => {
                         <a href="#footer" className="header__navigation-link">Контакты</a>
                     </li>
                     <li className="header__navigation-item">
-                        <a href="#footer" className="header__navigation-link">Выйти</a>
+                        <a className="header__navigation-link" onClick={() => {store.logout()}} >Выйти</a>
                     </li>
                 </ul>
             </nav>
@@ -36,14 +62,18 @@ const WelcomePage: FC = () => {
             <section className="welcome">
                 <h1 className="welcome__title">Добро пожаловать в крипту</h1>
                 <div className="welcome__body">
-                    <div className="welcome__body-message-container welcome__body-message-container--vertical">
-                        <p className="welcome__body-no-activated-user-message">Подтвердите аккаунт, чтобы пользоваться приложением</p>
-                        <a className="welcome__body-learn-link button transparent" href="#about">О проекте</a>
-                    </div>
-                    <div className="welcome__body-message-container">
-                        <a className="welcome__body-sign-link button">Старт</a>
-                        <a className="welcome__body-learn-link button transparent" href="#about">О проекте</a>
-                    </div>
+                    { store.user.isActivated
+                        ? <div className="welcome__body-message-container">
+                            <a className="welcome__body-sign-link button">Старт</a>
+                            <a className="welcome__body-learn-link button transparent" href="#about">О проекте</a>
+                        </div>
+                        : <div className="welcome__body-message-container welcome__body-message-container--vertical">
+                            <p className="welcome__body-no-activated-user-message">Подтвердите аккаунт, чтобы пользоваться приложением</p>
+                            <a className="welcome__body-learn-link button transparent" href="#about">О проекте</a>
+                        </div>
+                    }
+                    
+                    
                 </div>
             </section>
             
@@ -186,4 +216,4 @@ const WelcomePage: FC = () => {
   );
 };
 
-export default WelcomePage;
+export default observer(WelcomePage);

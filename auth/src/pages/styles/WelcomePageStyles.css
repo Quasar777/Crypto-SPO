@@ -116,6 +116,7 @@ p {
 
 .header__navigation-link:not(.header__navigation-link--acc):hover {
     color: #0082F3;
+    cursor: pointer;
 }
 
 .header__navigation-list {

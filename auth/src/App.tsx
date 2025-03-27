@@ -11,11 +11,11 @@ function App() {
   const { store } = useContext(Context);
   // const [users, setUsers] = useState<IUser[]>([]);
 
-  useEffect(() => {
-    if (localStorage.getItem("token")) {
-      store.checkAuth();
-    }
-  }, []);
+  // useEffect(() => {
+  //   if (localStorage.getItem("token")) {
+  //     store.checkAuth();
+  //   }
+  // }, []);
 
   // useEffect(() => {
   //   if (store.user.isActivated) {
@@ -24,15 +24,15 @@ function App() {
   // }, [store.user.isActivated]);
 
 
-  if (store.isLoading) {
-    return <div>Загрузка...</div>;
-  }
+  // if (store.isLoading) {
+  //   return <div>Загрузка...</div>;
+  // }
 
   // if (!store.isAuth) {
   //   return (
   //     <div style={{ background: `url(${background}) center/cover no-repeat`, width: '100vw', height: '100vh' }}>
   //       <div style={{display: 'flex', justifyContent: 'center'}}>
-  //         <RegForm />
+  //         <LoginForm />
   //       </div>
   //     </div>
   //   );
