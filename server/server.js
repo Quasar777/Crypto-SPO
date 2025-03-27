@@ -1,4 +1,4 @@
-require('dotenv').config({ path: '../.env' });
+require('dotenv').config({ path: '.env' });
 const API_KEY = process.env.COINSTATS_API_KEY;
 
 const express = require('express');
@@ -48,7 +48,7 @@ wss.on("connection", (ws) => {
     sendCoinData();
 
     // Устанавливаем интервал обновления данных (например, каждые 10 секунд)
-    const interval = setInterval(sendCoinData, 5000);
+    const interval = setInterval(sendCoinData, 99999000);
 
     ws.on("close", () => {
         console.log("[WebSocket server] Соединение WebSocket закрыто");

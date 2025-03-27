@@ -1,9 +1,10 @@
-import { Layout, Spin } from 'antd'
-import AppHeader from '../layout/AppHeader'
-import AppSider from '../layout/AppSider'
-import AppContent from '../layout/AppContent'
-import { useContext } from 'react'
-import CryptoContext from '../../context/crypto-context'
+import { Layout, Spin } from 'antd';
+import AppHeader from '../layout/AppHeader';
+import AppSider from '../layout/AppSider';
+import AppContent from '../layout/AppContent';
+import { useContext } from 'react';
+import CryptoContext from '../../context/crypto-context';
+import '../../styles/App.css';
 
 export default function AppLayout() {
   const { loading } = useContext(CryptoContext)
@@ -13,12 +14,12 @@ export default function AppLayout() {
   }
 
   return (
-    <Layout>
-      <AppHeader />
-      <Layout>
-        <AppSider />
-        <AppContent />
+      <Layout style={{backgroundColor: "#001529"}}>
+        <AppHeader />
+        <Layout className="AppLayoutBg">
+          <AppSider />
+          <AppContent />
+        </Layout>
       </Layout>
-    </Layout>
   )
 }

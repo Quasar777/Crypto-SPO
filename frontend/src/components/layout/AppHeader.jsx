@@ -12,6 +12,7 @@ const headerStyle = {
   display: 'flex',
   justifyContent: 'space-between',
   alignItems: 'center',
+  backgroundColor: 'transparent'
 }
 
 export default function AppHeader() {

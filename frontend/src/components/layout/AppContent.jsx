@@ -7,13 +7,12 @@ const contentStyle = {
   textAlign: 'center',
   minHeight: 'calc(100vh - 60px)',
   color: '#fff',
-  backgroundColor: '#001529',
+  backgroundColor: 'transparent',
   padding: '1rem',
 }
 
 export default function AppContent() {
   const { assets, crypto } = useCrypto()
-  //console.log(crypto)
 
   const cryptoPriceMap = crypto.reduce((acc, c) => {
     acc[c.id] = c.price
