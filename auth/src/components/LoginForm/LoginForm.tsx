@@ -4,7 +4,7 @@ import { observer } from "mobx-react-lite";
 import type { FormProps } from "antd";
 import classes from "./LoginFormStyles.module.css";
 import { Button, Divider, Form, Input, Typography } from "antd";
-
+import RegForm from "../RegForm/RegForm";
 
 type FieldType = {
   email: string;
@@ -65,8 +65,6 @@ const LoginForm: FC = () => {
             Войти
           </Button>
         </Form.Item>
-
-        <Typography>Нет аккаунта? еать ты лох</Typography>
       </Form>
     </div>
   );

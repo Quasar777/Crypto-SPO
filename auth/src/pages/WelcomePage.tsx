@@ -1,4 +1,4 @@
-import React, { FC, useContext, useEffect } from "react";
+import React, { FC, useContext, useEffect, useState } from "react";
 import './styles/normalize.css'
 import './styles/WelcomePageStyles.css'
 import about1Path from './images/about1.svg'
@@ -6,15 +6,18 @@ import about2Path from './images/about2.svg'
 import about3Path from './images/about3.svg'
 import bitcoinImagePath from './images/bitcoin-image.webp'
 import bgForLogin from '../images/authBackground.jpg'
-import { Typography } from "antd";
+import { Button, Typography } from "antd";
 import { Context } from "..";
 import { observer } from "mobx-react-lite";
 import LoginForm from "../components/LoginForm/LoginForm";
+import { Flex, Spin, Layout } from 'antd';
+import RegForm from "../components/RegForm/RegForm";
 
 
 
 const WelcomePage: FC = () => {
     const {store} = useContext(Context)
+    const [isRegistering, setIsRegistering] = useState(false);
 
     useEffect(() => {
         if (localStorage.getItem("token")) {
@@ -22,18 +25,27 @@ const WelcomePage: FC = () => {
         }
     }, []);
 
+    function redirectToApp() {
+        window.location.href = 'http://localhost:5173'
+    }
+
     if (store.isLoading) {
-        return <div>Загрузка...</div>;
+        return <Spin fullscreen />;
     }
 
     if (!store.isAuth) {
-    return (
-      <div style={{ background: `url(${bgForLogin}) center/cover no-repeat`, width: '100vw', height: '100vh' }}>
-        <div style={{display: 'flex', justifyContent: 'center'}}>
-          <LoginForm />
+        return (
+        <div style={{ background: `url(${bgForLogin}) center/cover no-repeat`, width: '100vw', height: '100vh' }}>
+            <div style={{display: 'flex', justifyContent: 'center'}}>
+                {isRegistering ? <RegForm /> : <LoginForm />}
+            </div>
+            <div style={{ textAlign: 'center', marginTop: 20 }}>
+                <Button type="link" onClick={() => setIsRegistering(!isRegistering)}>
+                    {isRegistering ? "Уже есть аккаунт? Войти" : "Нет аккаунта? Регистрация"}
+                </Button>
+            </div>
         </div>
-      </div>
-    );
+        );
     }
 
     return (
@@ -43,7 +55,9 @@ const WelcomePage: FC = () => {
             <nav className="header__navigation">
                 <ul className="header__navigation-list">
                     <li className="header__navigation-item">
-                        <p className="header__navigation-link header__navigation-link--acc">{store.user.email}</p>
+                        <p className="header__navigation-link header__navigation-link--acc">
+                            {store.user.email ?? 'войти'}
+                        </p>
                     </li>
                     <li className="header__navigation-item">
                         <a href="/" className="header__navigation-link">Главная</a>
@@ -64,7 +78,7 @@ const WelcomePage: FC = () => {
                 <div className="welcome__body">
                     { store.user.isActivated
                         ? <div className="welcome__body-message-container">
-                            <a className="welcome__body-sign-link button">Старт</a>
+                            <a className="welcome__body-sign-link button" onClick={() => redirectToApp()}>Старт</a>
                             <a className="welcome__body-learn-link button transparent" href="#about">О проекте</a>
                         </div>
                         : <div className="welcome__body-message-container welcome__body-message-container--vertical">
@@ -152,7 +166,7 @@ const WelcomePage: FC = () => {
         <footer className="footer" id="footer">
             <div className="footer__body container">
                 <div className="footer__column">
-                    <h4 className="footer__about-title footer-title">О Negative Technologies</h4>
+                    <h4 className="footer__about-title footer-title">О нас</h4>
                     <p className="footer__about-description">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique. Duis cursus, mi quis viverra ornare, eros dolor interdum nulla, ut commodo diam libero vitae erat.</p>
                 </div>
                 <div className="footer__column">
@@ -173,7 +187,7 @@ const WelcomePage: FC = () => {
                     </ul>
                 </div>
                 <div className="footer__column">
-                    <div className="footer__soc1als-title footer-title">Мы в социальных сетях</div>
+                    <div className="footer__soc1als-title footer-title">Мы в соцсетях</div>
                     <ul className="footer__soc1als-list">
                         <li className="footer__soc1als-item">
                             <svg viewBox="0 0 20 16" fill="none" xmlns="http://www.w3.org/2000/svg">

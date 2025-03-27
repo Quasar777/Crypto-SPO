@@ -12,7 +12,7 @@ type FieldType = {
 };
 
 
-const Login: FC = () => {
+const RegForm: FC = () => {
   const {store} = useContext(Context);
 
   const onFinish: FormProps<FieldType>["onFinish"] = ({email, password}) => {
@@ -74,4 +74,4 @@ const Login: FC = () => {
   );
 };
 
-export default observer(Login);
+export default observer(RegForm);

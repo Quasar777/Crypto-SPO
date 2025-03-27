@@ -8,7 +8,6 @@ import RegForm from "./components/RegForm/RegForm";
 import WelcomePage from "./pages/WelcomePage";
 
 function App() {
-  const { store } = useContext(Context);
   // const [users, setUsers] = useState<IUser[]>([]);
 
   // useEffect(() => {
