@@ -1,6 +1,11 @@
 import React, { FC } from "react";
+import './styles/normalize.css'
 import './styles/WelcomePageStyles.css'
-
+import about1Path from './images/about1.svg'
+import about2Path from './images/about2.svg'
+import about3Path from './images/about3.svg'
+import bitcoinImagePath from './images/bitcoin-image.webp'
+import { Typography } from "antd";
 
 const WelcomePage: FC = () => {
 
@@ -8,14 +13,20 @@ const WelcomePage: FC = () => {
   return (
         <div>
         <header className="header container">
-            <p className="logo">Velocity</p>
+            <p className="logo">Cryptan</p>
             <nav className="header__navigation">
                 <ul className="header__navigation-list">
                     <li className="header__navigation-item">
-                        <a href="/" className="header__navigation-link">Home</a>
+                        <p className="header__navigation-link header__navigation-link--acc">tsaloev.sarmat@gmail.com</p>
                     </li>
                     <li className="header__navigation-item">
-                        <a href="#footer" className="header__navigation-link">Contact</a>
+                        <a href="/" className="header__navigation-link">Главная</a>
+                    </li>
+                    <li className="header__navigation-item">
+                        <a href="#footer" className="header__navigation-link">Контакты</a>
+                    </li>
+                    <li className="header__navigation-item">
+                        <a href="#footer" className="header__navigation-link">Выйти</a>
                     </li>
                 </ul>
             </nav>
@@ -23,45 +34,51 @@ const WelcomePage: FC = () => {
 
         <main className="main">
             <section className="welcome">
-                <h1 className="welcome__title">This is Velocity</h1>
+                <h1 className="welcome__title">Добро пожаловать в крипту</h1>
                 <div className="welcome__body">
-                    <a className="welcome__body-sign-link button">sign up</a>
-                    <a className="welcome__body-learn-link button transparent">Learn more</a>
+                    <div className="welcome__body-message-container welcome__body-message-container--vertical">
+                        <p className="welcome__body-no-activated-user-message">Подтвердите аккаунт, чтобы пользоваться приложением</p>
+                        <a className="welcome__body-learn-link button transparent" href="#about">О проекте</a>
+                    </div>
+                    <div className="welcome__body-message-container">
+                        <a className="welcome__body-sign-link button">Старт</a>
+                        <a className="welcome__body-learn-link button transparent" href="#about">О проекте</a>
+                    </div>
                 </div>
             </section>
             
-            <section className="about container">
+            <section id="about" className="about container">
                 <div className="about__header">
-                    <h2 className="about__header-title  title-standard">what we do</h2>
-                    <p className="about__header-subtitle subtitle-standard">This is some text inside of a div block.</p>
+                    <h2 className="about__header-title  title-standard">О проекте</h2>
+                    <p className="about__header-subtitle subtitle-standard">Че мы делаем?</p>
                 </div>
                 <div className="about__body">
                     <ul className="about__list">
                         <li className="about__item">
-                            <img src="images/about1.svg" 
+                            <img src={about1Path}
                                 alt="graphic design" 
                                 className="about__item-image"
                                 loading="lazy"
                             />
-                            <h3 className="about__item-title item-title">Graphic Design</h3>
+                            <h3 className="about__item-title item-title">Ну чето там</h3>
                             <p className="about__item-subtitle item-subtitle">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique.</p>
                         </li>
                         <li className="about__item">
-                            <img src="images/about2.svg" 
+                            <img src={about2Path}
                                 alt="graphic design" 
                                 className="about__item-image"
                                 loading="lazy"
                             />
-                            <h3 className="about__item-title item-title">Awesome code</h3>
+                            <h3 className="about__item-title item-title">Сям</h3>
                             <p className="about__item-subtitle item-subtitle">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique.</p>
                         </li>
                         <li className="about__item">
-                            <img src="images/about3.svg" 
+                            <img src={about3Path}
                                 alt="graphic design" 
                                 className="about__item-image"
                                 loading="lazy"
                             />
-                            <h3 className="about__item-title item-title">free template</h3>
+                            <h3 className="about__item-title item-title">Туда сюда</h3>
                             <p className="about__item-subtitle item-subtitle">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique.</p>
                         </li>
                     </ul>
@@ -70,32 +87,32 @@ const WelcomePage: FC = () => {
 
             <section className="services">
                 <div className="services__header container">
-                    <h2 className="services__header-title  title-standard">services</h2>
-                    <p className="services__header-subtitle subtitle-standard">This is some text inside of a div block.</p>
+                    <h2 className="services__header-title  title-standard">Другие продукты</h2>
+                    <p className="services__header-subtitle subtitle-standard">Зацените</p>
                 </div>
                 <div className="services__body container">
                     <ul className="services__list">
                         <li className="services__item">
                             <img 
-                                src="images/services-1.jpg" 
+                                src={bitcoinImagePath}
                                 alt="service 1" 
                                 className="sercives__item-image"
                                 width="430" height="287" loading="lazy"
                             />
-                            <h3 className="services__item-title item-title">SERVICES one</h3>
-                            <p className="services__item-subtitle item-subtitle">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius.</p>
-                            <a className="services__body-learn-link button transparent">Learn more</a>
+                            <h3 className="services__item-title item-title">Автоскальпинг битка</h3>
+                            <p className="services__item-subtitle item-subtitle">Мощная закупка биткоина на 80т. долларах и автоматическая продажа на 20т.</p>
+                            <a className="services__body-learn-link button transparent">Подробнее</a>
                         </li>
                         <li className="services__item">
                             <img 
-                                src="images/services-2.jpg" 
+                                src={bitcoinImagePath}
                                 alt="service 1" 
                                 className="sercives__item-image"
                                 width="430" height="287" loading="lazy"
                             />
-                            <h3 className="services__item-title item-title">SERVICES two</h3>
-                            <p className="services__item-subtitle item-subtitle">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius.</p>
-                            <a className="services__body-learn-link button transparent">Learn more</a>
+                            <h3 className="services__item-title item-title">Генератор мутных темок</h3>
+                            <p className="services__item-subtitle item-subtitle">Для тех, кто слушает макана, занимается P2P и прочей шляпой</p>
+                            <a className="services__body-learn-link button transparent">Подробнее</a>
                         </li>
                     </ul>
                 </div>
@@ -105,11 +122,11 @@ const WelcomePage: FC = () => {
         <footer className="footer" id="footer">
             <div className="footer__body container">
                 <div className="footer__column">
-                    <h4 className="footer__about-title footer-title">about velocity</h4>
+                    <h4 className="footer__about-title footer-title">О Negative Technologies</h4>
                     <p className="footer__about-description">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique. Duis cursus, mi quis viverra ornare, eros dolor interdum nulla, ut commodo diam libero vitae erat.</p>
                 </div>
                 <div className="footer__column">
-                    <h4 className="footer__links-title footer-title">useful links</h4>
+                    <h4 className="footer__links-title footer-title">Полезные ссылки</h4>
                     <ul className="footer__links-list">
                         <li className="footer__link-item">
                             <p>Phasellus gravida semper nisi</p>
@@ -126,7 +143,7 @@ const WelcomePage: FC = () => {
                     </ul>
                 </div>
                 <div className="footer__column">
-                    <div className="footer__soc1als-title footer-title">Social</div>
+                    <div className="footer__soc1als-title footer-title">Мы в социальных сетях</div>
                     <ul className="footer__soc1als-list">
                         <li className="footer__soc1als-item">
                             <svg viewBox="0 0 20 16" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -162,7 +179,7 @@ const WelcomePage: FC = () => {
                 </div>
             </div>
             <div className="footer__extra">
-                <p className="footer__copyright">Copyright Velocity Inc. Made in Webflow.</p>
+                <p className="footer__copyright">Copyright Negative Technologies Inc.</p>
             </div>
         </footer>
     </div>
