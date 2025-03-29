@@ -9,12 +9,27 @@ const PORT = 8054;
 const WebSocket = require('ws');
 const http = require('http');
 const cors = require('cors')
+const mongoose = require('mongoose')
 
 app.use(cors())
 app.use(express.static('../frontend/dist'));
 
 const server = http.createServer(app);
 const wss = new WebSocket.Server({ server });
+
+const start = async() => {
+    try {
+        mongoose.connect(process.env.DB_URL, {
+            useNewUrlParser: true,
+            useUnifiedTopology: true,
+        });
+        console.log("успешно подключена бд с основного приложения")
+    } catch(e){
+        console.log("Ошибка подключения бд с основного приложения: ", e)
+        process.exit(1);
+    }
+}
+start()
 
 const options = {
     method: "GET",

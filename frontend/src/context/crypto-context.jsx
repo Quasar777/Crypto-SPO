@@ -1,5 +1,5 @@
 import { createContext, useState, useEffect, useContext } from 'react';
-import { fetchCryptoData, fetchAssets } from '../api'; // Убедитесь, что fetchCryptoData теперь работает с WebSocket
+import { fetchCryptoData, fetchAssets, fetchUserPortfolio } from '../api'; // Убедитесь, что fetchCryptoData теперь работает с WebSocket
 import { percentDifference } from '../utils';
 
 const CryptoContext = createContext({

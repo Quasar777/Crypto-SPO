@@ -1,3 +1,5 @@
+import axios from 'axios'
+
 export function fetchCryptoData(setData) {
   const socket = new WebSocket('ws://localhost:8054'); // Подключаемся к WebSocket-серверу
 
@@ -42,3 +44,7 @@ export function fetchAssets() {
       throw error; // Пробрасываем ошибку, чтобы её можно было обработать
     });
 }
+
+
+
+
