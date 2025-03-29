@@ -34,3 +34,18 @@ exports.addCrypto = async (req, res) => {
         res.status(500).json({ message: error.message });
     }
 }
+
+exports.removeCrypto = async (req, res) => {
+    try {
+        const {userId, coinId} = req.body;
+        const user = await User.findById(userId);
+        if (!user) {
+            return res.status(404).json({message: 'Пользователь не найден'})
+        }
+        user.portfolio = user.portfolio.filter(coin => coin.id !== coinId)
+        await user.save()
+        
+    } catch(e) {
+        res.status(500).json({ message: error.message });
+    }
+}
