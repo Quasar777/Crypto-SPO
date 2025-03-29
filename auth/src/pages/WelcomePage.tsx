@@ -144,7 +144,7 @@ const WelcomePage: FC = () => {
                                 width="430" height="287" loading="lazy"
                             />
                             <h3 className="services__item-title item-title">Автоскальпинг битка</h3>
-                            <p className="services__item-subtitle item-subtitle">Мощная закупка биткоина на 80т. долларах и автоматическая продажа на 20т.</p>
+                            <p className="services__item-subtitle item-subtitle">Мощная закупка биткоина на $80т. и автоматическая продажа на $20т.</p>
                             <a className="services__body-learn-link button transparent">Подробнее</a>
                         </li>
                         <li className="services__item">
