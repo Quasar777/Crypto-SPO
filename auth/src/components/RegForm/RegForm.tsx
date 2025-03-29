@@ -62,7 +62,7 @@ const RegForm: FC = () => {
 
         <Form.Item label={null}>
           <Button
-            style={{ width: "100%", padding: 20, marginTop: 20 }}
+            style={{ width: "100%", padding: 20 }}
             type="primary"
             htmlType="submit"
           >
