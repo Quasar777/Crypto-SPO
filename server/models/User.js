@@ -1,16 +1,20 @@
-const mongoose = require('mongoose')
+const {Schema, model} = require('mongoose')
 
-const PortfolioSchema = new mongoose.Schema({
-    id: {type: String, required: true},
-    amount: {type: Number, required: true},
-    price: {type: Number, required: true},
-    date: {type: Date, default: Date.now }
-})
-
-const UserSchema = new mongoose.Schema({
+const UserSchema = new Schema({
     email: {type: String, unique: true, required: true},
-    password: { type: String, required: true },
-    portfolio: [PortfolioSchema] // Портфель пользователя
+    password: {type: String, required: true},
+    isActivated: {type: Boolean, default: false},
+    activationLink: {type: String},
+
+    portfolio: [
+        {
+            id: { type: String, required: true }, // ID валюты 
+            amount: { type: Number, required: true }, // Количество монет
+            price: { type: Number, required: true }, // Цена покупки
+            date: { type: Date, default: Date.now }, // Дата покупки
+        }
+    ],
 })
 
-module.exports = mongoose.model('User', UserSchema)
+
+module.exports = model('User', UserSchema)

@@ -1,5 +1,5 @@
 import { createContext, useState, useEffect, useContext } from 'react';
-import { fetchCryptoData, fetchAssets, fetchUserPortfolio } from '../api'; // Убедитесь, что fetchCryptoData теперь работает с WebSocket
+import { fetchCryptoData, fetchAssets } from '../api'; // Убедитесь, что fetchCryptoData теперь работает с WebSocket
 import { percentDifference } from '../utils';
 
 const CryptoContext = createContext({
@@ -58,6 +58,31 @@ export function CryptoContextProvider({ children }) {
 
   // Функция для добавления нового актива
   function addAsset(newAsset) {
+    setAssets((prev) => mapAssets([...prev, newAsset], crypto));
+  }
+
+  function addAssetNEW(newAsset) {
+    fetch('http://localhost:8054/api/assets', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      credentials: 'include',
+      body: JSON.stringify(newAsset)
+    })
+      .then(response => {
+        if (!response.ok) {
+          throw new Error("Ошибка при добавлении актива")
+        }
+        return response.json();
+      })
+      .then(data => {
+        setAssets((prev) => [...prev, data.asset]);
+      }) 
+      .catch(error => {
+        console.log("Ошибка:", error)
+      })
+
     setAssets((prev) => mapAssets([...prev, newAsset], crypto));
   }
 
