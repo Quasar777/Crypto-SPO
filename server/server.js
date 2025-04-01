@@ -11,6 +11,7 @@ const http = require('http');
 const cors = require('cors')
 const mongoose = require('mongoose')
 const portfolioRoutes = require('./routes/PortfolioRoutes');
+const User = require('./models/User');
 
 app.use(cors({
     credentials: true,
@@ -91,7 +92,9 @@ app.get('/api/user', (req, res) => {
         } else {
             try {
                 // Парсим JSON и отправляем его
+                console.log(data)
                 const cryptoAssets = JSON.parse(data);
+                
                 res.json({ cryptoAssets });
             } catch (parseError) {
                 // Если JSON некорректен
@@ -99,6 +102,24 @@ app.get('/api/user', (req, res) => {
             }
         }
     });
+});
+
+
+app.post('/api/userZ', async (req, res) => {
+    
+    try {
+        const { email } = req.body;
+            
+        const user = await User.findOne({email});
+        if (!user) {
+            return res.status(404).json({message: 'Пользователь не найден'});
+        }
+        const cryptoAssets = user.portfolio;
+
+        res.json({cryptoAssets})
+    } catch(e){
+        res.status(500).json({ error: '[API] Ошибка при парсинге JSON' });
+    }
 });
 
 server.listen(PORT, () => console.log(`[SERVER NOTE] Сервер запущен на http://localhost:${PORT}`));
