@@ -3,7 +3,7 @@ const userController = require('../controllers/user-controller')
 
 const router = express.Router();
 
-router.get('/getportfolio', userController.getPortfolio);
+router.post('/getportfolio', userController.getPortfolio);
 // router.post('/addasset', addCrypto);
 // router.delete('/removeasset', removeCrypto);
 
