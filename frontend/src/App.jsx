@@ -20,6 +20,6 @@ export default function App() {
           <Route path="*" element={<Error404 />} />
         </Routes>
       </Router>
-    </CryptoContextProvider>
+    </CryptoContextProvider>  
   );
 }

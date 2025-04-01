@@ -45,7 +45,10 @@ export function fetchAssets() {
 
 export function fetchAssetsNEW() {
   return fetch('http://localhost:8054/api/portfolio', {
-    credentials: 'include'
+    credentials: 'include',
+    body: {
+      
+    }
   }) // Запрос к вашему API
     .then((response) => {
       if (!response.ok) {

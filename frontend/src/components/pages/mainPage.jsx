@@ -5,6 +5,7 @@ import AppContent from '../layout/AppContent';
 import { useContext } from 'react';
 import CryptoContext from '../../context/crypto-context';
 import '../../styles/App.css';
+import Counter from '../COUNTER';
 
 export default function AppLayout() {
   const { loading } = useContext(CryptoContext)
@@ -19,7 +20,9 @@ export default function AppLayout() {
         <Layout className="AppLayoutBg">
           <AppSider />
           <AppContent />
+          <Counter />
         </Layout>
+        
       </Layout>
   )
 }

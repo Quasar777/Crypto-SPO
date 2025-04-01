@@ -4,7 +4,7 @@ const mongoose = require('mongoose')
 class userController {
     async getPortfolio(req, res, next) {
         try {
-            const {email} = req.body;
+            const { email } = req.body;
     
             const user = await User.findOne({email});
             if (!user) {
