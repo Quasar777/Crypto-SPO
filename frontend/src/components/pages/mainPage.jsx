@@ -6,13 +6,15 @@ import { useContext } from 'react';
 import CryptoContext from '../../context/crypto-context';
 import '../../styles/App.css';
 import Counter from '../COUNTER';
+import { Context } from '../../main';
 
 export default function AppLayout() {
-  const { loading } = useContext(CryptoContext)
+  // const { loading } = useContext(CryptoContext)
 
-  if (loading) {
-    return <Spin fullscreen />
-  }
+  // if (loading) {
+  //   return <Spin fullscreen />
+  // }
+  const {store} = useContext(Context)
 
   return (
       <Layout style={{backgroundColor: "#001529"}}>
@@ -20,7 +22,7 @@ export default function AppLayout() {
         <Layout className="AppLayoutBg">
           <AppSider />
           <AppContent />
-          <Counter />
+          <button onClick={() => store.getPortfolio()}>аля монтера</button>
         </Layout>
         
       </Layout>
