@@ -62,26 +62,7 @@ export function CryptoContextProvider({ children }) {
   }
 
   function addAssetNEW(newAsset) {
-    fetch('http://localhost:8054/api/assets', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      credentials: 'include',
-      body: JSON.stringify(newAsset)
-    })
-      .then(response => {
-        if (!response.ok) {
-          throw new Error("Ошибка при добавлении актива")
-        }
-        return response.json();
-      })
-      .then(data => {
-        setAssets((prev) => [...prev, data.asset]);
-      }) 
-      .catch(error => {
-        console.log("Ошибка:", error)
-      })
+    
 
     setAssets((prev) => mapAssets([...prev, newAsset], crypto));
   }

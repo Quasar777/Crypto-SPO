@@ -1,10 +1,13 @@
 import {makeAutoObservable, makeObservable, observable} from 'mobx'
 import axios from "axios"
 import UserService from '../service/UserService';
+import { fetchAssets } from '../src/api';
+import { percentDifference } from '../src/utils';
 
 export default class SimpleStore {
     email = "test@mail.com";
     portfolio = [];
+    cryptoData = [];
     isLoading = false;
 
     constructor() {
@@ -12,8 +15,11 @@ export default class SimpleStore {
                 email: observable,
                 portfolio: observable,
                 isLoading: observable,
+                cryptoData: observable
             }
         )
+        this.setPortfolio()
+        this.setCryptoData()
     }
 
     setLoading(bool) {
@@ -25,13 +31,32 @@ export default class SimpleStore {
     }
 
     async setPortfolio() {
+        this.portfolio = await this.getPortfolio()
+    }
+
+    async setCryptoData() {
+        const response = await UserService.setCryptoData()
+        this.cryptoData = response.result;
         
     }
 
     async getPortfolio() {
         try {
             const response = await UserService.getPortfolio(this.email)
+            const asset = response.data
+            const coin = ""
+
             console.log(response)
+            return asset;
+            // return {
+            //     grow: asset.price < coin.price,
+            //     growPercent: percentDifference(asset.price, coin.price),
+            //     totalAmount: asset.amount * coin.price,
+            //     totalProfit: asset.amount * coin.price - asset.amount * asset.price,
+            //     name: coin.name,
+                        
+            //     ...response.data
+            // }
 
         } catch(e) {
             console.log(e)
