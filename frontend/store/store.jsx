@@ -18,8 +18,8 @@ export default class SimpleStore {
                 cryptoData: observable
             }
         )
-        this.setPortfolio()
         this.setCryptoData()
+        this.setPortfolio()
     }
 
     setLoading(bool) {
@@ -31,7 +31,8 @@ export default class SimpleStore {
     }
 
     async setPortfolio() {
-        this.portfolio = await this.getPortfolio()
+        await this.setCryptoData();
+        this.portfolio = await this.getPortfolio();
     }
 
     async setCryptoData() {
@@ -40,28 +41,34 @@ export default class SimpleStore {
         
     }
 
-    async getPortfolio() {
-        try {
-            const response = await UserService.getPortfolio(this.email)
-            const asset = response.data
-            const coin = ""
+    // async getPortfolio() {
+    //     try {
+            
+    //         const response = await UserService.getPortfolio(this.email)
+    //         const assets = response.data
 
-            console.log(response)
-            return asset;
-            // return {
-            //     grow: asset.price < coin.price,
-            //     growPercent: percentDifference(asset.price, coin.price),
-            //     totalAmount: asset.amount * coin.price,
-            //     totalProfit: asset.amount * coin.price - asset.amount * asset.price,
-            //     name: coin.name,
-                        
-            //     ...response.data
-            // }
+    //         return assets.map((asset) => {
+    //             const coin = this.cryptoData.find((c) => c.id === asset.id);
 
-        } catch(e) {
-            console.log(e)
-        }
-    }
+    //             if (!coin) return asset; 
+
+    //             console.log(asset)
+          
+    //             return {
+    //               grow: asset.price < coin.price,
+    //               growPercent: percentDifference(asset.price, coin.price),
+    //               totalAmount: asset.amount * coin.price,
+    //               totalProfit: asset.amount * coin.price - asset.amount * asset.price,
+    //               name: coin.name,
+    //               ...asset,
+    //             };
+    //           });
+              
+
+    //     } catch(e) {
+    //         console.log(e)
+    //     }
+    // }
     
 }
 

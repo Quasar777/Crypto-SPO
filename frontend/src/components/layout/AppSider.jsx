@@ -18,7 +18,7 @@ export default function AppSider() {
   return (
     <Layout.Sider width="25%" style={siderStyle}>
       {
-      store.portfolio.map((asset) => (
+      assets.map((asset) => (
         <Card key={asset.id} style={{ marginBottom: '1rem' }}>
           <Statistic
             title={capitalize(asset.id)}

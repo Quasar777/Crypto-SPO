@@ -1,3 +1,8 @@
+import { useContext } from "react";
+import { Context } from "./main";
+
+
+
 export function fetchCryptoData(setData) {
   const socket = new WebSocket('ws://localhost:8054'); // Подключаемся к WebSocket-серверу
 
@@ -25,7 +30,6 @@ export function fetchCryptoData(setData) {
   return socket; // Можно использовать для закрытия соединения при размонтировании компонента
 }
 
-
 export function fetchAssets() {
   return fetch('http://localhost:8054/api/user') // Запрос к вашему API
     .then((response) => {
@@ -44,11 +48,12 @@ export function fetchAssets() {
 }
 
 export function fetchAssetsNEW() {
-  return fetch('http://localhost:8054/api/portfolio', {
+
+  return fetch('http://localhost:8054/api/userZ', {
     credentials: 'include',
-    body: {
-      
-    }
+    method: 'POST',
+    body: JSON.stringify({ email: "test@mail.com" }),
+    headers: { 'Content-Type': 'application/json' }
   }) // Запрос к вашему API
     .then((response) => {
       if (!response.ok) {
@@ -57,7 +62,7 @@ export function fetchAssetsNEW() {
       return response.json(); // Парсим JSON
     })
     .then((data) => {
-      return data.assets; // Возвращаем данные из API
+      return data.cryptoAssets; // Возвращаем данные из API
     })
     .catch((error) => {
       console.error('Ошибка:', error);

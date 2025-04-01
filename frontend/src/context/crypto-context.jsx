@@ -1,5 +1,5 @@
 import { createContext, useState, useEffect, useContext } from 'react';
-import { fetchCryptoData, fetchAssets } from '../api'; // Убедитесь, что fetchCryptoData теперь работает с WebSocket
+import { fetchCryptoData, fetchAssets, fetchAssetsNEW } from '../api'; // Убедитесь, что fetchCryptoData теперь работает с WebSocket
 import { percentDifference } from '../utils';
 
 const CryptoContext = createContext({
@@ -34,7 +34,7 @@ export function CryptoContextProvider({ children }) {
     // Загрузка начальных данных (assets)
     async function loadInitialData() {
       setLoading(true);
-      const assets = await fetchAssets(); // Загружаем assets из API
+      const assets = await fetchAssetsNEW(); // Загружаем assets из API
       setAssets(assets); // Устанавливаем начальные данные для assets
       setLoading(false);
     }
