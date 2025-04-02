@@ -1,8 +1,8 @@
 const User = require('../models/User')
 const mongoose = require('mongoose')
-require('dotenv').config({ path: '../env' });
+require('dotenv').config({ path: '../.env' });
 const dotenv = require('dotenv')
-const API_KEY = "X6lLYjNDciSZa0J6SmNIWdxCa/94DbCN5J5KXkuNQAc=";
+const API_KEY = process.env.COINSTATS_API_KEY;
 
 class userController {
     async getPortfolio(req, res, next) {

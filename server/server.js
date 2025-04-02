@@ -79,32 +79,6 @@ wss.on("connection", (ws) => {
 });
 
 
-// Путь к JSON-файлу
-const filePath = path.join(__dirname, 'userData.json');
-
-// Роут для возврата данных из JSON-файла
-app.get('/api/user', (req, res) => {
-    // Читаем файл
-    fs.readFile(filePath, 'utf8', (err, data) => {
-        if (err) {
-            // Если файл не найден или произошла ошибка при чтении
-            res.status(500).json({ error: '[API] Ошибка при чтении файла' });
-        } else {
-            try {
-                // Парсим JSON и отправляем его
-                console.log(data)
-                const cryptoAssets = JSON.parse(data);
-                
-                res.json({ cryptoAssets });
-            } catch (parseError) {
-                // Если JSON некорректен
-                res.status(500).json({ error: '[API] Ошибка при парсинге JSON' });
-            }
-        }
-    });
-});
-
-
 app.post('/api/userZ', async (req, res) => {
     
     try {
