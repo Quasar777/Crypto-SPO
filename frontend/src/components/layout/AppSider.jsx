@@ -14,6 +14,7 @@ export default function AppSider() {
 
   const { assets } = useContext(CryptoContext)
   const { store } = useContext(Context)
+  
 
   return (
     <Layout.Sider width="25%" style={siderStyle}>
@@ -32,11 +33,11 @@ export default function AppSider() {
             size="small"
             dataSource={[
               {
-                title: 'Total Profit',
+                title: 'Заработано:',
                 value: asset.totalProfit,
                 withTag: true,
               },
-              { title: 'Coins Amount', value: asset.amount, isPlain: true },
+              { title: 'Кол-во монет', value: asset.amount, isPlain: true },
             ]}
             renderItem={(item) => (
               <List.Item>

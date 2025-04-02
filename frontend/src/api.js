@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { Context } from "./main";
+import {Context} from './main'
 
 export function fetchCryptoData(setData) {
   const socket = new WebSocket('ws://localhost:8054'); // Подключаемся к WebSocket-серверу
@@ -45,26 +45,26 @@ export function fetchAssets() {
     });
 }
 
-export function fetchAssetsNEW() {
-  return fetch('http://localhost:8054/api/userZ', {
-    credentials: 'include',
-    method: 'POST',
-    body: JSON.stringify({ email: "test@mail.com" }),
-    headers: { 'Content-Type': 'application/json' }
-  })
-    .then((response) => {
-      if (!response.ok) {
-        throw new Error('Ошибка при загрузке данных');
-      }
-      return response.json();
-    })
-    .then((data) => {
-      return data.cryptoAssets;
-    })
-    .catch((error) => {
-      console.error('Ошибка:', error);
-      throw error; 
+export async function fetchAssetsNEW(email) {
+  try {
+    const response = await fetch('http://localhost:8054/api/userZ', {
+      credentials: 'include',
+      method: 'POST',
+      body: JSON.stringify({ email }),
+      headers: { 'Content-Type': 'application/json' }
     });
+
+    if (!response.ok) {
+      throw new Error('Ошибка при загрузке данных');
+    }
+
+    const data = await response.json();
+    return data.cryptoAssets;
+    
+  } catch (error) {
+    console.error('Ошибка:', error);
+    throw error;
+  }
 }
 
 

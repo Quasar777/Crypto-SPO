@@ -1,6 +1,7 @@
 import { Table } from 'antd';
 import { useCrypto } from '../context/crypto-context';
 import './AssetsTable.css'; // Импортируем файл со стилями
+import { getReadableDate } from '../utils';
 
 const columns = [
   {
@@ -21,6 +22,12 @@ const columns = [
     defaultSortOrder: 'descend',
     sorter: (a, b) => a.amount - b.amount,
   },
+  {
+    title: 'Дата покупки:',
+    dataIndex: 'date',
+    defaultSortOrder: 'descend',
+    sorter: (a, b) => a.amount - b.amount,
+  },
 ];
 
 export default function AssetsTable() {
@@ -31,6 +38,7 @@ export default function AssetsTable() {
     name: a.name,
     price: a.price,
     amount: a.amount,
+    date: getReadableDate(a.date)
   }));
 
   return (

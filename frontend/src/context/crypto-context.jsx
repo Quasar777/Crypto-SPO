@@ -3,6 +3,7 @@ import { fetchCryptoData, fetchAssets, fetchAssetsNEW } from '../api'; // Убе
 import { percentDifference } from '../utils';
 import axios from 'axios';
 import $api from '../../http';
+import { Context } from '../main';
 
 const CryptoContext = createContext({
   assets: [],
@@ -13,7 +14,8 @@ const CryptoContext = createContext({
 export function CryptoContextProvider({ children }) {
   const [loading, setLoading] = useState(false);
   const [crypto, setCrypto] = useState([]);
-  const [assets, setAssets] = useState([]);
+  const [assets, setAssets] = useState([])
+  const {store} = useContext(Context)
 
   // Функция для преобразования assets с учетом новых данных
   function mapAssets(assets, cryptoData) {
@@ -36,7 +38,7 @@ export function CryptoContextProvider({ children }) {
     // Загрузка начальных данных (assets)
     async function loadInitialData() {
       setLoading(true);
-      const assets = await fetchAssetsNEW();
+      const assets = await fetchAssetsNEW(store.email);
       setAssets(assets); 
       setLoading(false);
     }
@@ -63,7 +65,7 @@ export function CryptoContextProvider({ children }) {
   async function addAssetNEW(newAsset) {
     try {
       $api.post('/addasset', {
-        email: "test@mail.com",
+        email: store.email,
         id: newAsset.id,
         amount: newAsset.amount,
         price: newAsset.price,
@@ -71,7 +73,8 @@ export function CryptoContextProvider({ children }) {
       })
     
       setLoading(true);
-      const updatedAssets = await fetchAssetsNEW();
+      const updatedAssets = await fetchAssetsNEW(store.email);
+      console.log(updatedAssets)
       setAssets(updatedAssets);
       setLoading(false);
 
