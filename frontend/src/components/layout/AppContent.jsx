@@ -29,7 +29,7 @@ export default function AppContent() {
       <Flex justify='space-between'>
         <Flex  vertical>
           <Typography.Title level={3} style={{ textAlign: 'left', color: '#fff' }}>
-            Цена портфеля:{' '}
+            Вложено:{' '}
             {assets
               .map((asset) => asset.amount * cryptoPriceMap[asset.id])
               .reduce((acc, v) => (acc += v), 0)

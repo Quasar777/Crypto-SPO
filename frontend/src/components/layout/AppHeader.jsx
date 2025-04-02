@@ -41,6 +41,10 @@ export default function AppHeader() {
     setModal(true)
   }
 
+  function redirectToWelcomePage() {
+    window.location.href = 'http://localhost:3000'
+  }
+
   return (
     <Layout.Header style={headerStyle}>
 
@@ -69,17 +73,23 @@ export default function AppHeader() {
             </Space>
           )}
         />
-        <Flex gap='small'>
+        <Flex gap='middle' align='center'>
           <UserOutlined style={{color: 'white', fontSize: 22}} />
           <p style={{color: 'white', fontSize: 20}}>
             {store.email}
           </p>
+          
         </Flex>
       </Flex>
 
-      <Button type="primary" onClick={() => setDrawer(true)}>
-        Добавить
-      </Button>
+      <Flex>
+        <Button type="primary" onClick={() => setDrawer(true)}>
+          Добавить
+        </Button>
+        <Button type='link' onClick={() => redirectToWelcomePage()}>
+          на главную
+        </Button>
+      </Flex>
 
       <Modal open={modal} onCancel={() => setModal(false)} footer={null}>
         <CoinInfoModal coin={coin} />

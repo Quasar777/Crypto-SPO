@@ -5,19 +5,19 @@ import { getReadableDate } from '../utils';
 
 const columns = [
   {
-    title: 'Name',
+    title: 'Валюта',
     dataIndex: 'name',
     sorter: (a, b) => a.name.length - b.name.length,
     sortDirections: ['descend'],
   },
   {
-    title: 'Price, $',
+    title: 'Цена (средняя), $',
     dataIndex: 'price',
     defaultSortOrder: 'descend',
     sorter: (a, b) => a.price - b.price,
   },
   {
-    title: 'Amount',
+    title: 'Кол-во',
     dataIndex: 'amount',
     defaultSortOrder: 'descend',
     sorter: (a, b) => a.amount - b.amount,
