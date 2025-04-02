@@ -5,7 +5,7 @@ import about1Path from './images/about1.svg'
 import about2Path from './images/about2.svg'
 import about3Path from './images/about3.svg'
 import bitcoinImagePath from './images/bitcoin-image.webp'
-import bgForLogin from '../images/authBackground.jpg'
+import bgForLogin from '../images/darkCryptoBg.jpg'
 import { Button, Typography } from "antd";
 import { Context } from "..";
 import { observer } from "mobx-react-lite";
