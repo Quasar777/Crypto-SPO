@@ -31,9 +31,6 @@ export default function AppContent() {
       </Typography.Title>
       <PortfolioChart />
       <AssetsTable />
-      <div>
-        
-      </div>
     </Layout.Content>
   )
 }

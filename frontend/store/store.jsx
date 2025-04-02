@@ -6,20 +6,18 @@ import { percentDifference } from '../src/utils';
 
 export default class SimpleStore {
     email = "test@mail.com";
-    portfolio = [];
-    cryptoData = [];
+    
     isLoading = false;
 
     constructor() {
         makeObservable(this, {
                 email: observable,
-                portfolio: observable,
+                
                 isLoading: observable,
-                cryptoData: observable
+                
             }
-        )
-        this.setCryptoData()
-        this.setPortfolio()
+        );
+        this.setEmail();
     }
 
     setLoading(bool) {
@@ -27,7 +25,10 @@ export default class SimpleStore {
     }
 
     async setEmail() {
-
+        const params =  new URLSearchParams(window.location.search);
+        const userEmail = params.get('email');
+        this.email = userEmail;
+        console.log(this.email)
     }
 
     async setPortfolio() {

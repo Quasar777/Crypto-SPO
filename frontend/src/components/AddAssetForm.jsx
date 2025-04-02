@@ -39,7 +39,7 @@ export default function AddAssetForm({ onClose }) {
         subTitle={`Added ${assetRef.current.amount} of ${coin.name} by price ${assetRef.current.price}`}
         extra={[
           <Button type="primary" key="console" onClick={onClose}>
-            Close
+            Закрыть
           </Button>,
         ]}
       />
@@ -53,7 +53,7 @@ export default function AddAssetForm({ onClose }) {
           width: '100%',
         }}
         onSelect={(v) => setCoin(crypto.find((c) => c.id === v))}
-        placeholder="Select coin"
+        placeholder="Выбрать"
         options={crypto.map((coin) => ({
           label: coin.name,
           value: coin.id,

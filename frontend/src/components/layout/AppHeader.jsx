@@ -1,8 +1,11 @@
-import { Layout, Select, Space, Button, Modal, Drawer } from 'antd'
+import { Layout, Select, Space, Button, Modal, Drawer, Flex } from 'antd'
 import { useCrypto } from '../../context/crypto-context'
-import { useEffect, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import CoinInfoModal from '../CoinInfoModal'
 import AddAssetForm from '../AddAssetForm'
+import { Context } from '../../main'
+import { UserOutlined } from '@ant-design/icons'
+
 
 const headerStyle = {
   width: '100%',
@@ -21,6 +24,7 @@ export default function AppHeader() {
   const [modal, setModal] = useState(false)
   const [drawer, setDrawer] = useState(false)
   const { crypto } = useCrypto()
+  const {store} = useContext(Context)
 
   useEffect(() => {
     const keypress = (event) => {
@@ -39,33 +43,42 @@ export default function AppHeader() {
 
   return (
     <Layout.Header style={headerStyle}>
-      <Select
-        style={{
-          width: 250,
-        }}
-        open={select}
-        onSelect={handleSelect}
-        onClick={() => setSelect((prev) => !prev)}
-        value="Coins Info"
-        options={crypto.map((coin) => ({
-          label: coin.name,
-          value: coin.id,
-          icon: coin.icon,
-        }))}
-        optionRender={(option) => (
-          <Space>
-            <img
-              style={{ width: 20 }}
-              src={option.data.icon}
-              atl={option.data.label}
-            />{' '}
-            {option.data.label}
-          </Space>
-        )}
-      />
+
+      <Flex gap='middle' align='center'>
+        <Select
+          style={{
+            width: 250,
+          }}
+          open={select}
+          onSelect={handleSelect}
+          onClick={() => setSelect((prev) => !prev)}
+          value="Статус валют"
+          options={crypto.map((coin) => ({
+            label: coin.name,
+            value: coin.id,
+            icon: coin.icon,
+          }))}
+          optionRender={(option) => (
+            <Space>
+              <img
+                style={{ width: 20 }}
+                src={option.data.icon}
+                atl={option.data.label}
+              />{' '}
+              {option.data.label}
+            </Space>
+          )}
+        />
+        <Flex gap='small'>
+          <UserOutlined style={{color: 'white', fontSize: 22}} />
+          <p style={{color: 'white', fontSize: 20}}>
+            {store.email}
+          </p>
+        </Flex>
+      </Flex>
 
       <Button type="primary" onClick={() => setDrawer(true)}>
-        Add Coins
+        Добавить
       </Button>
 
       <Modal open={modal} onCancel={() => setModal(false)} footer={null}>
@@ -74,7 +87,7 @@ export default function AppHeader() {
 
       <Drawer
         width={600}
-        title="Add Coins"
+        title="Добавить валюту"
         onClose={() => setDrawer(false)}
         open={drawer}
         destroyOnClose

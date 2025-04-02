@@ -7,11 +7,11 @@ import CryptoContext from '../../context/crypto-context';
 import '../../styles/App.css';
 
 export default function AppLayout() {
-  const { loading } = useContext(CryptoContext)
+  // const { loading } = useContext(CryptoContext)
 
-  if (loading) {
-    return <Spin fullscreen />
-  }
+  // if (loading) {
+  //   return <Spin fullscreen />
+  // }
 
   return (
       <Layout style={{backgroundColor: "#001529"}}>
