@@ -1,6 +1,8 @@
 import { createContext, useState, useEffect, useContext } from 'react';
 import { fetchCryptoData, fetchAssets, fetchAssetsNEW } from '../api'; // Убедитесь, что fetchCryptoData теперь работает с WebSocket
 import { percentDifference } from '../utils';
+import axios from 'axios';
+import $api from '../../http';
 
 const CryptoContext = createContext({
   assets: [],
@@ -17,7 +19,7 @@ export function CryptoContextProvider({ children }) {
   function mapAssets(assets, cryptoData) {
     return assets.map((asset) => {
       const coin = cryptoData.find((c) => c.id === asset.id);
-      if (!coin) return asset; // Если данные по монете не найдены, возвращаем исходный asset
+      if (!coin) return asset; 
 
       return {
         grow: asset.price < coin.price,
@@ -34,8 +36,8 @@ export function CryptoContextProvider({ children }) {
     // Загрузка начальных данных (assets)
     async function loadInitialData() {
       setLoading(true);
-      const assets = await fetchAssetsNEW(); // Загружаем assets из API
-      setAssets(assets); // Устанавливаем начальные данные для assets
+      const assets = await fetchAssetsNEW();
+      setAssets(assets); 
       setLoading(false);
     }
 
@@ -44,31 +46,44 @@ export function CryptoContextProvider({ children }) {
 
   useEffect(() => {
     // Подключение к WebSocket
-    const socket = fetchCryptoData((newData) => {
-      // newData — это данные, полученные через WebSocket
-      setCrypto(newData); // Обновляем состояние crypto
-      setAssets((prevAssets) => mapAssets(prevAssets, newData)); // Обновляем assets на основе новых данных
+    const socket = fetchCryptoData((newData) => {      
+      setCrypto(newData); 
+      setAssets((prevAssets) => mapAssets(prevAssets, newData));
     });
 
-    // Закрытие соединения при размонтировании компонента
     return () => {
       socket.close();
     };
   }, []);
 
-  // Функция для добавления нового актива
   function addAsset(newAsset) {
     setAssets((prev) => mapAssets([...prev, newAsset], crypto));
   }
 
-  function addAssetNEW(newAsset) {
+  async function addAssetNEW(newAsset) {
+    try {
+      $api.post('/addasset', {
+        email: "test@mail.com",
+        id: newAsset.id,
+        amount: newAsset.amount,
+        price: newAsset.price,
+        date: newAsset.date
+      })
     
+      setLoading(true);
+      const updatedAssets = await fetchAssetsNEW();
+      setAssets(updatedAssets);
+      setLoading(false);
 
-    setAssets((prev) => mapAssets([...prev, newAsset], crypto));
+    } catch(e) {
+      console.log("adding new asset error: ", e)
+    }
+    
+    
   }
 
   return (
-    <CryptoContext.Provider value={{ loading, crypto, assets, addAsset }}>
+    <CryptoContext.Provider value={{ loading, crypto, assets, addAssetNEW }}>
       {children}
     </CryptoContext.Provider>
   );

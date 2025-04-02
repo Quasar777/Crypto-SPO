@@ -10,7 +10,7 @@ import {
   DatePicker,
   Result,
 } from 'antd'
-import { useState, useRef } from 'react'
+import { useState, useRef, useContext } from 'react'
 import { useCrypto } from '../context/crypto-context'
 import CoinInfo from './CoinInfo'
 
@@ -26,7 +26,7 @@ const validateMessages = {
 
 export default function AddAssetForm({ onClose }) {
   const [form] = Form.useForm()
-  const { crypto, addAsset } = useCrypto()
+  const { crypto, addAssetNEW } = useCrypto()
   const [coin, setCoin] = useState(null)
   const [submitted, setSubmitted] = useState(false)
   const assetRef = useRef()
@@ -82,7 +82,7 @@ export default function AddAssetForm({ onClose }) {
     }
     assetRef.current = newAsset
     setSubmitted(true)
-    addAsset(newAsset)
+    addAssetNEW(newAsset)
   }
 
   function handleAmountChange(value) {

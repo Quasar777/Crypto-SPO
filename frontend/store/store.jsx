@@ -32,7 +32,7 @@ export default class SimpleStore {
 
     async setPortfolio() {
         await this.setCryptoData();
-        this.portfolio = await this.getPortfolio();
+        // this.portfolio = await this.getPortfolio();
     }
 
     async setCryptoData() {
