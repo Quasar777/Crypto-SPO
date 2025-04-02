@@ -26,7 +26,7 @@ const WelcomePage: FC = () => {
     }, []);
 
     function redirectToApp() {
-        window.location.href = 'http://localhost:5173'
+        window.location.href = `http://localhost:5173?email=${encodeURIComponent(store.user.email)}`
     }
 
     if (store.isLoading) {
